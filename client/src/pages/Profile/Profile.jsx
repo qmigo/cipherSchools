@@ -1,70 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '@/pages/Profile/profile.css'
 import Dropdown from 'react-bootstrap/Dropdown';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
-
-function getDatesInRange(d1='2023-01-01', d2='2023-03-01') {
-    const startDate = new Date(d1)
-    const endDate = new Date(d2)
-    const date = new Date(startDate.getTime());
-  
-    const dates = [];
-  
-    while (date <= endDate) {
-        
-      dates.push({
-        date: new Date(date).toISOString().split('T')[0],
-        value:0
-        });
-      date.setDate(date.getDate() + 1);
-    }
-    console.log(dates)
-    return dates;
-}
-
-const patternDate = [
-    {date:"2022-01-03", count:1},
-    {date:"2022-01-04", count:2},
-    {date:"2022-01-05", count:3},
-    {date:"2022-01-06", count:4},
-    {date:"2022-01-07", count:3},
+import {patternDate} from '../../components/PatternDate/patternDate';
 
 
-    {date:"2022-01-10", count:2},
-    {date:"2022-01-17", count:1},
-    {date:"2022-01-24", count:2},
-
-    {date:"2022-01-24", count:3},
-    {date:"2022-01-25", count:4},
-    {date:"2022-01-26", count:3},
-    {date:"2022-01-27", count:2},
-    {date:"2022-01-28", count:1},
-
-    {date:"2022-01-12", count:2},
-    {date:"2022-01-19", count:3},
-
-
-    {date:"2022-02-28", count:1},
-    {date:"2022-03-1", count:2},
-    {date:"2022-03-2", count:3},
-    {date:"2022-03-3", count:4},
-    {date:"2022-03-4", count:3},
-
-    {date:"2022-03-7", count:3},
-    {date:"2022-03-14", count:1},
-    {date:"2022-03-15", count:2},
-    {date:"2022-03-16", count:3},
-    
-    {date:"2022-03-21", count:4},
-    {date:"2022-03-28", count:3},
-    {date:"2022-03-29", count:2},
-    {date:"2022-03-30", count:1},
-    {date:"2022-03-31", count:2},
-    {date:"2022-04-1", count:3},
-
-]
 const Profile = () => {
+
+    const [aboutMe, setAboutMe] = useState(null)
+    const [isAboutMeActive, setIsAboutMeActive] = useState(false)
+    const handleChangeAboutMe = ()=>{
+        setIsAboutMeActive(!isAboutMeActive)
+    }
+
+    const [isOnTheWebActive, setIsOnTheWebActive] = useState(false)    
+    const [linkedIn, setLinkedIn] = useState(null)
+    const [github, setGithub] = useState(null)
+    const [facebook, setFacebook] = useState(null)
+    const [twitter, setTwitter] = useState(null)
+    const [instagram, setInstagram] = useState(null)
+    const [website, setWebsite] = useState(null)
+
+    const handleChangeOnTheWeb = ()=>{
+        setIsOnTheWebActive(!isOnTheWebActive)
+    }
+
+    const [isProffInfopActive, setIsProffInfoActive] = useState(false)
+    const [highestEd, setHighestEd] = useState(null)
+    const [job, setJob] = useState(null)
+
+    const handleChangeProffInfo = ()=>{
+        setIsProffInfoActive(!isProffInfopActive)
+    }
+
+    const [isSecurityActive, setIsSecurityActive] = useState(false)
+    const [password, setPassword] = useState(null)
+    
+    const handleChangeSecurity = ()=>{
+        setIsSecurityActive(!isSecurityActive)
+    }
+
   return (
     <div className='profile'>
 
@@ -86,13 +62,19 @@ const Profile = () => {
       <div className="profile-box profile-about-me">
         <div className="head-strip">
             <span>About Me</span>
-            <button className='btn'>Edit</button>
+            <button className='btn' onClick={handleChangeAboutMe} >{isAboutMeActive?"Save":"Edit"}</button>
         </div>
         <div className="about-text">
-            <textarea  rows="4" disabled placeholder='Something about you ...'></textarea>
+            <textarea  rows="4" disabled={!isAboutMeActive} placeholder='Something about you ...' onChange={(e)=>{setAboutMe(e.target.value)}}></textarea>
+            <span className="edit-icon" style={{display:isAboutMeActive===false?"none":"block"}}>
+                <img src="https://www.cipherschools.com/static/media/Pencil.da4ca677ddf0145e7203662a76a85ad5.svg" alt="pencil" />
+            </span>
         </div>
       </div>
       <div className="profile-box profile-cipher-map">
+      <div className="head-strip">
+            <span>Cipher Map</span>
+        </div>
         <CalendarHeatmap
             startDate={new Date('2022-01-01')}
             endDate={new Date('2023-05-01')}
@@ -109,20 +91,32 @@ const Profile = () => {
                 return `color-scale-${value.count}`;
             }}
         />
+        <div className="labels">
+            <div>Less</div>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <div>More</div>
+        </div>
       </div>
       <div className="profile-box profile-web-links">
       <div className="head-strip">
             <span>On the Web</span>
-            <button className='btn'>Edit</button>
+            <button className='btn' onClick={handleChangeOnTheWeb}>{isOnTheWebActive?"Save":"Edit"}</button>
         </div>
         <div className="links-box">
             <div className="link">
                 <div className="link-title">LinkedIn</div>
-                <div className="input-link">
+                <div className="input-link" >
                     <div className="input-icon">
                         <img src="https://www.cipherschools.com/static/media/LinkedIn.297c3e0e0411d3b8a7946c85a72f2bc7.svg" alt="linkedIn" />
                     </div>
-                    <input type="text" placeholder='LinkedIn'/>
+                    <input type="text" placeholder='LinkedIn' onChange={(e)=>setLinkedIn(e.target.value)} disabled={!isOnTheWebActive}/>
+                    <span className="edit-icon" style={{display:isOnTheWebActive===false?"none":"block"}}>
+                        <img src="https://www.cipherschools.com/static/media/Pencil.da4ca677ddf0145e7203662a76a85ad5.svg" alt="pencil" />
+                    </span>
                 </div>
             </div>
             <div className="link">
@@ -131,7 +125,10 @@ const Profile = () => {
                     <div className="input-icon">
                     <img src="https://www.cipherschools.com/static/media/Github.2d6b6c0c10a3b3aa7e3c7438770688f8.svg" alt="github" />
                     </div>
-                    <input type="text" placeholder='Github'/>
+                    <input type="text" placeholder='Github' onChange={(e)=>setGithub(e.target.value)} disabled={!isOnTheWebActive}/>
+                    <span className="edit-icon" style={{display:isOnTheWebActive===false?"none":"block"}}>
+                        <img src="https://www.cipherschools.com/static/media/Pencil.da4ca677ddf0145e7203662a76a85ad5.svg" alt="pencil" />
+                    </span>
                 </div>
             </div>
             <div className="link">
@@ -140,7 +137,10 @@ const Profile = () => {
                     <div className="input-icon">
                     <img src="https://www.cipherschools.com/static/media/Facebook.766939726b802e2c4354f9629feba07f.svg" alt="facebook" />
                     </div>
-                    <input type="text" placeholder='Facebook'/>
+                    <input type="text" placeholder='Facebook' onChange={(e)=>setFacebook(e.target.value)} disabled={!isOnTheWebActive}/>
+                    <span className="edit-icon" style={{display:isOnTheWebActive===false?"none":"block"}}>
+                        <img src="https://www.cipherschools.com/static/media/Pencil.da4ca677ddf0145e7203662a76a85ad5.svg" alt="pencil" />
+                    </span>
                 </div>
             </div>
             <div className="link">
@@ -149,7 +149,10 @@ const Profile = () => {
                     <div className="input-icon">
                     <img src="https://www.cipherschools.com/static/media/Twitter.8dec5dacebf84c0be8bcaa33dee4a7a0.svg" alt="Twitter" />
                     </div>
-                    <input type="text" placeholder='Twitter'/>
+                    <input type="text" placeholder='Twitter' onChange={(e)=>setTwitter(e.target.value)} disabled={!isOnTheWebActive}/>
+                    <span className="edit-icon" style={{display:isOnTheWebActive===false?"none":"block"}}>
+                        <img src="https://www.cipherschools.com/static/media/Pencil.da4ca677ddf0145e7203662a76a85ad5.svg" alt="pencil" />
+                    </span>
                 </div>
             </div>
             <div className="link">
@@ -158,7 +161,10 @@ const Profile = () => {
                     <div className="input-icon">
                     <img src="https://www.cipherschools.com/static/media/Instagram.31ac5927c40b6d948dc3369a313cb7c9.svg" alt="Instagram" />
                     </div>
-                    <input type="text" placeholder='Instagram'/>
+                    <input type="text" placeholder='Instagram' onChange={(e)=>setInstagram(e.target.value)} disabled={!isOnTheWebActive}/>
+                    <span className="edit-icon" style={{display:isOnTheWebActive===false?"none":"block"}}>
+                        <img src="https://www.cipherschools.com/static/media/Pencil.da4ca677ddf0145e7203662a76a85ad5.svg" alt="pencil" />
+                    </span>
                 </div>
             </div>
             <div className="link">
@@ -167,42 +173,46 @@ const Profile = () => {
                     <div className="input-icon">
                     <img src="https://www.cipherschools.com/static/media/Website.cd72366beefca5afbc5259237cf87838.svg" alt="Website" />
                     </div>
-                    <input type="text" placeholder='Website'/>
+                    <input type="text" placeholder='Website' onChange={(e)=>setWebsite(e.target.value)} disabled={!isOnTheWebActive}/>
+                    <span className="edit-icon" style={{display:isOnTheWebActive===false?"none":"block"}}>
+                        <img src="https://www.cipherschools.com/static/media/Pencil.da4ca677ddf0145e7203662a76a85ad5.svg" alt="pencil" />
+                    </span>
                 </div>
             </div>
         </div>
       </div>
       <div className="profile-box profile-personal-info">
         <div className="head-strip">
-            <span>On the Web</span>
-            <button className='btn'>Edit</button>
+            <span>PROFESSIONAL INFORMATION</span>
+            <button className='btn' onClick={handleChangeProffInfo} >{isProffInfopActive?"Save":"Edit"}</button>
         </div>
         <div className="links-box">
             <div className="link">
                 <div className="link-title">Highest Education</div>
                 <Dropdown>
-                <Dropdown.Toggle id="dropdown-basic">
-                    Choose an education
+                <Dropdown.Toggle id="dropdown-basic" disabled={!isProffInfopActive}>
+                    {highestEd===null?"Choose an education":highestEd}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    <Dropdown.Item  onClick={()=>{alert('hi')}} >Action</Dropdown.Item>
-                    <Dropdown.Item  onClick={()=>{alert('hi')}} >Another action</Dropdown.Item>
-                    <Dropdown.Item  onClick={()=>{alert('hi')}} >Something else</Dropdown.Item>
+                    <Dropdown.Item  onClick={(e)=>{setHighestEd(e.target.innerText)}} >Action</Dropdown.Item>
+                    <Dropdown.Item  onClick={(e)=>{setHighestEd(e.target.innerText)}} >Another action</Dropdown.Item>
+                    <Dropdown.Item  onClick={(e)=>{setHighestEd(e.target.innerText)}} >Something else</Dropdown.Item>
                 </Dropdown.Menu>
                 </Dropdown>
             </div>
             <div className="link">
                 <div className="link-title">What do you do currently ?</div>
                 <Dropdown>
-                <Dropdown.Toggle id="dropdown-basic" disabled={true}>
-                    Choose an occupation
+                <Dropdown.Toggle id="dropdown-basic"  disabled={!isProffInfopActive}>
+                {job===null?"Choose an occupation":highestEd}
+                    
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    <Dropdown.Item  onClick={()=>{alert('hi')}} >Action</Dropdown.Item>
-                    <Dropdown.Item  onClick={()=>{alert('hi')}} >Another action</Dropdown.Item>
-                    <Dropdown.Item  onClick={()=>{alert('hi')}} >Something else</Dropdown.Item>
+                    <Dropdown.Item  onClick={(e)=>{setJob(e.target.innerText)}} >Action</Dropdown.Item>
+                    <Dropdown.Item  onClick={(e)=>{setJob(e.target.innerText)}} >Another action</Dropdown.Item>
+                    <Dropdown.Item  onClick={(e)=>{setJob(e.target.innerText)}} >Something else</Dropdown.Item>
                 </Dropdown.Menu>
                 </Dropdown>
             </div>
@@ -211,13 +221,13 @@ const Profile = () => {
       <div className="profile-box profile-password">
       <div className="head-strip">
             <span>Password and Security</span>
-            <button className='btn'>Change</button>
+            <button className='btn' onClick={handleChangeSecurity}>Change</button>
         </div>
         <div className="links-box">
             <div className="link">
                 <div className="link-title">Password</div>
                 <div className="input-link">
-                    <input type="password" />
+                    <input type="password" readOnly={true} onChange={(e)=>{setPassword(e.target.value)}}/>
                 </div>
             </div>
         </div>

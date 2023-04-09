@@ -58,7 +58,7 @@
 
 .react-calendar-heatmap{
     width: 100%;
-    height: 300px;
+    height: 200px;
 }
 
 .react-calendar-heatmap text {
@@ -72,7 +72,30 @@
 .react-calendar-heatmap .color-scale-3 { fill: #44a340; }
 .react-calendar-heatmap .color-scale-4 { fill: #1e6823; }
 
-
+.labels{
+    display: flex;
+    gap: 0px 10px;
+    font-size: 0.9rem;
+}
+.labels>span{
+    height: 20px;
+    width: 20px;
+}
+.labels>span:nth-child(2){
+    background-color: rgb(218, 240, 207);
+}
+.labels>span:nth-child(3){
+    background-color: #d6e685;
+}
+.labels>span:nth-child(4){
+    background-color: #8cc665;
+}
+.labels>span:nth-child(5){
+    background-color: #44a340;
+}
+.labels>span:nth-child(6){
+    background-color: #1e6823;
+}
 
 /* box css */
 
@@ -115,6 +138,16 @@
 /* about text */
 .about-text{
     width: 100%;
+    position: relative;
+}
+
+.edit-icon{
+    position: absolute;
+    right: 10px;
+    top: calc(50% - 15px);
+}
+.edit-icon>img{
+    width: 15px;
 }
 .about-text>textarea{
     background-color: white;
@@ -123,6 +156,14 @@
     padding: 10px;
     resize: none;
     border-radius: 10px;
+}
+textarea:active{
+    border: none;
+    outline: none;
+}
+textarea:focus{
+    border: none;
+    outline: none;
 }
 
 .links-box{
@@ -149,6 +190,7 @@
     line-height: 1.5;
 }
 .input-link{
+    position: relative;
     background-color:#fff;
     border-radius: 8px;
     display: flex;
@@ -158,7 +200,7 @@
 .input-link>input{
     background: transparent;
     border: none;
-    color: #70707044;
+    color: #262525f5;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -224,3 +266,4 @@
     font-size: 0.9rem;
     padding: 8px 15px;
 }
+
