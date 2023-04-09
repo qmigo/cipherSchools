@@ -1,0 +1,226 @@
+
+.profile{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #f2f5fa;
+    
+}
+
+/* header css */
+
+.profile-bg{
+    width: 100%;
+    background-image: url('https://www.cipherschools.com/static/media/ProfileCover.e525f2d51356332792cb.png');
+}
+.profile-header{
+    display: flex;
+    padding: 10px 60px;
+    background:  linear-gradient(to right,#fff,transparent,#fff);
+}
+.avatar{
+    object-fit: contain;
+    width: 8%;
+}
+.avatar>img{
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+}
+.header-info{
+    width: 85%;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header-info>span{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #080f0fd9;
+}
+.header-info-left{
+    display: flex;
+    flex-direction: column;
+}
+.header-info-left>span{
+    color: #080f0fd9;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+.header-info-left>span:nth-child(2){
+    color: #080f0fd9;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+/*  header css */
+
+.react-calendar-heatmap{
+    width: 100%;
+    height: 300px;
+}
+
+.react-calendar-heatmap text {
+    font-size: 0.5rem !important;
+}
+.react-calendar-heatmap .color-empty {
+    fill: #fff !important;
+}
+.react-calendar-heatmap .color-scale-1 { fill: #d6e685; }
+.react-calendar-heatmap .color-scale-2 { fill: #8cc665; }
+.react-calendar-heatmap .color-scale-3 { fill: #44a340; }
+.react-calendar-heatmap .color-scale-4 { fill: #1e6823; }
+
+
+
+/* box css */
+
+.profile-box{
+    display: flex;
+    width: 90%;
+    margin: 10px auto;
+    border-bottom: 2px solid rgba(10,30,50,.1);
+    flex-direction: column;
+    gap:20px;
+    padding: 30px 20px;
+    
+}
+
+.head-strip{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.head-strip>span{
+    font-size: 1.3rem;
+    color: #080f0fd9;
+    font-weight: 600;
+}
+.head-strip>button{
+    background-color: #f3912e;
+    color: white;
+    padding: 5px 20px !important;
+    font-size: 0.9rem !important;
+}
+.head-strip>button:hover{
+    background-color: #f3902eb5;
+    color: white;
+}
+
+/* box css */
+
+/* about text */
+.about-text{
+    width: 100%;
+}
+.about-text>textarea{
+    background-color: white;
+    color: #080f0fd9;
+    width: 100%;
+    padding: 10px;
+    resize: none;
+    border-radius: 10px;
+}
+
+.links-box{
+    --max-size: 400px;
+    grid-gap: 0 30px;
+    display: grid;
+    gap: 0 30px;
+    grid-template-columns: repeat(auto-fit,minmax(var(--max-size),1fr));
+    /* height: auto; */
+    
+    width: 100%;
+}
+.link{
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+    position: relative;
+    width: 100%;
+}
+.link-title{
+    color: #080f0fd9;
+    font-size: 1rem;
+    font-weight: 550;
+    line-height: 1.5;
+}
+.input-link{
+    background-color:#fff;
+    border-radius: 8px;
+    display: flex;
+    margin-top: 4px;
+    padding: 0.5rem 1rem;
+}
+.input-link>input{
+    background: transparent;
+    border: none;
+    color: #70707044;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    width: 100%;
+}
+.input-icon{
+    padding-right: 5px;
+}
+.input-icon>image{
+    border-radius: 100%;
+    height: 25px;
+    width: 25px;
+}
+.input-link>input:active{
+    border: none;
+    outline: none;
+}
+.input-link>input:focus{
+    border: none;
+    outline: none;
+
+}
+.dropdown-toggle{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    color: #080f0fd9;
+    margin-top: 10px;
+}
+.dropdown-toggle:active{
+    border: none;
+    outline: none;
+}
+.dropdown-toggle:focus{
+    border: none;
+    outline: none;
+}
+.dropdown-toggle:hover{
+  background-color: #fff;
+    color: #080f0fd9;  
+}
+.dropdown>div{
+    width: 100%;
+}
+
+.interest-box{
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 1rem;
+}
+.interest-item{
+    align-items: center;
+    background-color: rgba(243,145,46,.1);;
+    border-radius: 6px;
+    color: #f3912e;
+    display: flex;
+    justify-content: center;
+    line-height: 1.5;
+    font-size: 0.9rem;
+    padding: 8px 15px;
+}
