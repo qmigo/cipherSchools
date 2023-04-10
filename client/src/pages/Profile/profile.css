@@ -267,3 +267,55 @@ textarea:focus{
     padding: 8px 15px;
 }
 
+.input-box{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.input-title{
+    color: #2c3d4f;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.25;
+}
+.input-password{
+    align-items: center;
+    display: flex;
+    width: 100%;
+}
+.input-password>input{
+    color: #2c3d4f;
+    background-color: #f2f5fa;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    font-size: 13px;
+    height: 40px;
+    margin: 5px 0;
+    outline: none;
+    padding: 0 12px;
+    width: 100%;
+}
+.input-password>img{
+    cursor: pointer;
+    display: flex;
+    height: 30px;
+    margin-left: -35px;
+    width: 30px;
+}
+.interest-container{
+    grid-gap: 15px;
+    display: grid;
+    gap: 15px;
+    grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+    max-height: 350px;
+    overflow: hidden auto;
+}
+.interest-container>.interest-item:nth-child(odd){
+    color: white;
+    background-color: #f3912e;
+
+}

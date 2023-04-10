@@ -3,11 +3,15 @@ import '@/pages/Profile/profile.css'
 import Dropdown from 'react-bootstrap/Dropdown';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import {patternDate} from '../../components/PatternDate/patternDate';
+import { useSelector } from 'react-redux';
 
 
 const Profile = () => {
-
+    const {name} = useSelector(state => state.user)
+    console.log(name)
     const [aboutMe, setAboutMe] = useState(null)
     const [isAboutMeActive, setIsAboutMeActive] = useState(false)
     const handleChangeAboutMe = ()=>{
@@ -40,10 +44,80 @@ const Profile = () => {
     const handleChangeSecurity = ()=>{
         setIsSecurityActive(!isSecurityActive)
     }
+    
+    const savePassword = ()=>{
+        console.log("password")
+        setIsSecurityActive(false)
+    }
 
+    const [isInterestActive, setIsInterestActive] = useState(false)
+    const [interests, setInterests] = useState(null)
+
+    const saveInterest = ()=>{
+        console.log("interests")
+        setIsInterestActive(false)
+    }
+    
   return (
     <div className='profile'>
-
+      <Modal show={isSecurityActive} onHide={()=>{setIsSecurityActive(false)}}>
+        <Modal.Body>
+            <div className="container">
+            <div className="validation-error"></div>
+            <div className="input-box">
+                <div className="input-title">Old Password</div>
+                <div className="input-password">
+                    <input type="password" id="old-password" placeholder='Old Password'/>
+                    <img src="https://www.cipherschools.com/static/media/Eye.270f75dfd9c2b2af1ea99439d7cf3d9c.svg" alt="eye" onClick={()=>{}}/>
+                </div>
+            </div>
+            <div className="input-box">
+                <div className="input-title">New Password</div>
+                <div className="input-password">
+                    <input type="password" id="new-password" placeholder='New Password'/>
+                    <img src="https://www.cipherschools.com/static/media/Eye.270f75dfd9c2b2af1ea99439d7cf3d9c.svg" alt="eye" onClick={()=>{}}/>
+                </div>
+            </div>
+            <div className="input-box">
+                <div className="input-title">Confirm Password</div>
+                <div className="input-password">
+                    <input type="password" id="confirm-password" placeholder='Confirm Password'/>
+                    <img src="https://www.cipherschools.com/static/media/Eye.270f75dfd9c2b2af1ea99439d7cf3d9c.svg" alt="eye" onClick={()=>{}}/>
+                </div>
+            </div>
+            </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant='outline-danger' className='btn btn-sm ' onClick={()=>{setIsSecurityActive(false)}}>
+            Close
+          </Button>
+          <Button variant='success' className='btn btn-sm ' onClick={savePassword}>
+            Save
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal show={isInterestActive} onHide={()=>{setIsInterestActive(false)}}>
+        <Modal.Body>
+            <div className="interest-container">
+                <div className="interest-item">App Development</div>
+                <div className="interest-item">Game Development</div>
+                <div className="interest-item">Programming</div>
+                <div className="interest-item">Data Structures</div>
+                <div className="interest-item">Machine Learning</div>
+                <div className="interest-item">Data Science</div>
+                <div className="interest-item">Web Development</div>
+                <div className="interest-item">Others</div>
+            </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant='outline-danger' className='btn btn-sm ' onClick={()=>{setIsInterestActive(false)}}>
+            Close
+          </Button>
+          <Button variant='success' className='btn btn-sm ' onClick={saveInterest}>
+            Save
+          </Button>
+        </Modal.Footer>
+      </Modal>
     <div className="profile-bg">
       <div className="profile-header">
         <div className="avatar">
@@ -52,7 +126,7 @@ const Profile = () => {
         <div className="header-info">
             <div className="header-info-left">
             <span>Hello,</span>
-            <span>Ankur Mishra</span>
+            <span>{name}</span>
             <span>ank031100@gmail.com</span>
             </div>
             <span className='header-followers'>0 Followers</span>
@@ -235,7 +309,7 @@ const Profile = () => {
       <div className="profile-box profile-interests">
         <div className="head-strip">
             <span>Password and Security</span>
-            <button className='btn'>Change</button>
+            <button className='btn' onClick={()=>{setIsInterestActive(true)}}>Change</button>
         </div>
         <div className="interest-box">
             <span className="interest-item">Machine Learning</span>
