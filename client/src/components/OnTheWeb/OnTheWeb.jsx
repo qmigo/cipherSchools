@@ -86,6 +86,9 @@ const OnTheWeb = () => {
     },[])
 
   return (
+    <>
+    {
+    !isLoading?
     <div className="profile-box profile-web-links">
       <div className="head-strip">
             <span>On the Web</span>
@@ -166,6 +169,9 @@ const OnTheWeb = () => {
             </div>
         </div>
       </div>
+      :<h1>Loading</h1>
+      }
+      </>
   )
 }
 
