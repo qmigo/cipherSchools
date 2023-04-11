@@ -314,8 +314,15 @@ textarea:focus{
     max-height: 350px;
     overflow: hidden auto;
 }
-.interest-container>.interest-item:nth-child(odd){
+.interest-container>.interest-item{
+    cursor: pointer;
+
+}
+.interest-item-active{
     color: white;
     background-color: #f3912e;
-
+}
+.interest-item-false{
+    background-color: rgba(243,145,46,.1);
+    color: #f3912e;
 }

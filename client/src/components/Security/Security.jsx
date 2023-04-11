@@ -36,6 +36,7 @@ const Security = () => {
         }
 
         try {
+            isLoading(true)
             const {data} = await axios.put(`${process.env.URL}/changePassword?userId=${userId}`,{
                 oldPassword,
                 newPassword
@@ -51,6 +52,7 @@ const Security = () => {
         } catch (error) {
             alert(error.response.data.msg)
         }
+        isLoading(false)
         setIsSecurityActive(false)
     }
 
@@ -87,7 +89,7 @@ const Security = () => {
           <Button variant='outline-danger' className='btn btn-sm ' onClick={()=>{setIsSecurityActive(false)}}>
             Close
           </Button>
-          <Button variant='success' className='btn btn-sm ' onClick={savePassword}>
+          <Button variant='success' disabled={isLoading} className='btn btn-sm ' onClick={savePassword}>
             Save
           </Button>
         </Modal.Footer>

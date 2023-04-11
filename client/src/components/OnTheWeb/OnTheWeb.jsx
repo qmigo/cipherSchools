@@ -36,7 +36,6 @@ const OnTheWeb = () => {
             setLinkedIn(data.user.linkedin)
             setGithub(data.user.github)
             setWebsite(data.user.website)
-            console.log(data)
         } catch (error) {
             console.log(error)
         }
