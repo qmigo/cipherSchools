@@ -11,12 +11,16 @@ import { setUser } from '@/slice/userSlice'
 function App() {
   const dispatch = useDispatch()
   const token = localStorage.getItem('token')
-  const {userId, firstName} = decodeToken(token)
-  
-  dispatch(setUser({
-    userId,
-    name:firstName
-  }))
+  if(token)
+  {
+    const {userId, name, email} = decodeToken(token)
+    console.log(userId, name, email)
+    dispatch(setUser({
+      userId,
+      name,
+      email
+    }))
+  }
 
   return (
     <div className="App">

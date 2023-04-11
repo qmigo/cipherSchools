@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {useState, useEffect} from 'react'
-
+const token = localStorage.getItem('token')
 const useFetch = (url)=>{
     const [data, setData] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -10,7 +10,9 @@ const useFetch = (url)=>{
         async function fetchData(){
             setIsLoading(true)
             try {
-                const {data} = await axios.get(url)
+                const {data} = await axios.get(url,{
+                    headers: { Authorization: `Bearer ${token}` }
+                })
                 setData(data)
             } catch (error) {
                 setError(error)
@@ -26,7 +28,9 @@ const useFetch = (url)=>{
         async function fetchData(){
             setIsLoading(true)
             try {
-                const {data} = await axios.get(url)
+                const {data} = await axios.get(url,{
+                    headers: { Authorization: `Bearer ${token}` }
+                })
                 setData(data)
             } catch (error) {
                 setError(error)

@@ -70,7 +70,7 @@ const Navbar = () => {
           ?
           <>
           <Modal.Body>
-            <Login setIsLoginActive={setIsLoginActive} />
+            <Login setIsAuthOpen={setIsAuthOpen} />
           </Modal.Body>
           <Modal.Footer >
             Get <button className='btn' onClick={()=>{setIsLoginActive(false)}}> <u>Registered</u> </button>  with us now...

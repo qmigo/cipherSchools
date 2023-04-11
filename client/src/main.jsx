@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 import { CookiesProvider } from 'react-cookie';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Router>
       <Provider store={store}>
         <CookiesProvider>
@@ -16,5 +16,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </CookiesProvider>
       </Provider>
     </Router>
-  </React.StrictMode>,
+  // </React.StrictMode>,
 )

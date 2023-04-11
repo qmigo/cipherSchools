@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUser } from '@/slice/userSlice'
 import { useNavigate } from 'react-router-dom'
-const Login = () => {
+const Login = (props) => {
   const navigate = useNavigate()
   const user = useSelector(state => state.user)
   const [isLoading, setIsLoading] = useState(false)
@@ -20,13 +20,15 @@ const Login = () => {
                   password
               })
               localStorage.setItem('token', data.token)
-              const {userId, firstName} = decodeToken(data.token)
+              const {userId, name, email:emailId} = decodeToken(data.token)
               
               dispatch(setUser({
                 userId,
-                name:firstName
+                name,
+                email:emailId
               }))
-              // navigate('/profile')
+              props.setIsAuthOpen(false)
+              navigate('/profile')
           }
 
       } catch (error) {
