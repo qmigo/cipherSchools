@@ -16,5 +16,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </CookiesProvider>
       </Provider>
     </Router>
-  // </React.StrictMode>,
+  // </React.StrictMode>, 
 )

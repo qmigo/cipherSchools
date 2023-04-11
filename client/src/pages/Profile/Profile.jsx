@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import '@/pages/Profile/profile.css'
 
 import { useSelector } from 'react-redux';
-import axios from 'axios'
 import About from '../../components/About/About';
 import HeatMap from '../../components/HeatMap/HeatMap';
 import OnTheWeb from '../../components/OnTheWeb/OnTheWeb';

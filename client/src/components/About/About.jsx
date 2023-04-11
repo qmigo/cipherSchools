@@ -26,7 +26,6 @@ const About = () => {
                 headers: { Authorization: `Bearer ${token}` }
             })
             setAboutMe(data.user.about)
-            console.log(data)
         } catch (error) {
             console.log(error)
         }
