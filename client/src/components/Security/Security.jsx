@@ -1,19 +1,56 @@
 import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-
+import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 const Security = () => {
 
-    const [isSecurityActive, setIsSecurityActive] = useState(false)
-    const [password, setPassword] = useState(null)
+    const token = localStorage.getItem('token')
+    const {userId} = useSelector(state=> state.user)
     
+    const [isLoading, setIsLoading] = useState(false)
+
+    const [isSecurityActive, setIsSecurityActive] = useState(false)
+    const [password, setPassword] = useState('random string bcoz password are not stored at frontend')
+    
+    const [oldPassword, setOldPassword] = useState(null)
+    const [newPassword, setNewPassword] = useState(null)
+    const [confirmPassword, setConfirmPassword] = useState(null)
+
     const handleChangeSecurity = ()=>{
         setIsSecurityActive(!isSecurityActive)
     }
     
-    const savePassword = ()=>{
-        console.log("password")
+    const savePassword = async()=>{
+        if(!oldPassword || !newPassword || !confirmPassword)
+        {
+            alert('All fields are mandatory')
+            return
+        }
+
+        if(newPassword !== confirmPassword)
+        {
+            alert("Password and Confirm Password not match")
+            return
+        }
+
+        try {
+            const {data} = await axios.put(`${process.env.URL}/changePassword?userId=${userId}`,{
+                oldPassword,
+                newPassword
+            },
+            {
+                headers: { Authorization: `Bearer ${token}` }
+
+            }
+            )
+           
+            alert("Password Changed Successfully")
+            
+        } catch (error) {
+            alert(error.response.data.msg)
+        }
         setIsSecurityActive(false)
     }
 
@@ -26,21 +63,21 @@ const Security = () => {
             <div className="input-box">
                 <div className="input-title">Old Password</div>
                 <div className="input-password">
-                    <input type="password" id="old-password" placeholder='Old Password'/>
+                    <input type="password" id="old-password" placeholder='Old Password' onChange={(e)=>{setOldPassword(e.target.value)}}/>
                     <img src="https://www.cipherschools.com/static/media/Eye.270f75dfd9c2b2af1ea99439d7cf3d9c.svg" alt="eye" onClick={()=>{}}/>
                 </div>
             </div>
             <div className="input-box">
                 <div className="input-title">New Password</div>
                 <div className="input-password">
-                    <input type="password" id="new-password" placeholder='New Password'/>
+                    <input type="password" id="new-password" placeholder='New Password' onChange={(e)=>{setNewPassword(e.target.value)}}/>
                     <img src="https://www.cipherschools.com/static/media/Eye.270f75dfd9c2b2af1ea99439d7cf3d9c.svg" alt="eye" onClick={()=>{}}/>
                 </div>
             </div>
             <div className="input-box">
                 <div className="input-title">Confirm Password</div>
                 <div className="input-password">
-                    <input type="password" id="confirm-password" placeholder='Confirm Password'/>
+                    <input type="password" id="confirm-password" placeholder='Confirm Password' onChange={(e)=>{setConfirmPassword(e.target.value)}}/>
                     <img src="https://www.cipherschools.com/static/media/Eye.270f75dfd9c2b2af1ea99439d7cf3d9c.svg" alt="eye" onClick={()=>{}}/>
                 </div>
             </div>
@@ -64,7 +101,7 @@ const Security = () => {
             <div className="link">
                 <div className="link-title">Password</div>
                 <div className="input-link">
-                    <input type="password" readOnly={true} onChange={(e)=>{setPassword(e.target.value)}}/>
+                    <input type="password" value={password} readOnly={true} onChange={(e)=>{setPassword(e.target.value)}}/>
                 </div>
             </div>
         </div>
