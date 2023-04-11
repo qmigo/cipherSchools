@@ -34,7 +34,7 @@ const Login = (props) => {
           }
 
       } catch (error) {
-          toast(error)
+          toast(error.response.data.msg)
       }
       setIsLoading(false)
   }

@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import '@/components/Navbar/navbar.css'
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import {AiOutlineHeart, AiOutlineUser} from'react-icons/ai'
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 import Login from '@/components/Login/Login'
 import Register from '@/components/Register/Register'
-
+import {clearUser} from '@/slice/userSlice'
+import { toast } from 'react-toastify';
 
 const listOfOptions = [
   {
@@ -43,8 +44,8 @@ const listOfOptions = [
 
 const Navbar = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const {userId, name} = useSelector(state=> state.user)
-
   const [isLoginActive, setIsLoginActive] = useState(true)
   const [isAuthOpen, setIsAuthOpen] = useState(false)
 
@@ -117,6 +118,17 @@ const Navbar = () => {
               <span ><AiOutlineUser size={"1.3rem"} /></span>
               <span>Profile</span> 
             </span>
+          <span>
+          {
+            userId && 
+            <button className='btn btn-small btn-outlined-dark' onClick={()=>{
+              localStorage.removeItem('token')
+              dispatch(clearUser())
+              toast("Logged Out Successfuly")
+              navigate('/')
+            }}>Logout</button>
+              }
+          </span>
         </div>
       </div>
     </div>

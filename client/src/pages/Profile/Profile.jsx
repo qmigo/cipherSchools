@@ -25,10 +25,10 @@ const Profile = () => {
       async function fetchData(){
         setIsLoading(true)
         try {
-            const {data} = await axios.get(`${process.env.URL}/getFollowerDetails?userId=${userId}`,{
+            const {data} = await axios.get(`${process.env.URL}/getUser?userId=${userId}`,{
                 headers: { Authorization: `Bearer ${token}` }
             })
-            
+            setFollowers(data.user.followers.length)
         } catch (error) {
             toast(error)
         }
@@ -53,7 +53,7 @@ const Profile = () => {
             <span>{name}</span>
             <span>{email}</span>
             </div>
-            <span className='header-followers' onClick={()=>{navigate('/followers')}}>{followers===null?0:"-"} Followers</span>
+            <span className='header-followers' onClick={()=>{navigate('/followers')}}>{followers===null?0:followers} Followers</span>
         </div>
       </div>
     </div>
