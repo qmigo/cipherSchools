@@ -44,7 +44,6 @@ const listOfOptions = [
 const Navbar = () => {
   const navigate = useNavigate()
   const {userId, name} = useSelector(state=> state.user)
-  console.log(userId, name)
 
   const [isLoginActive, setIsLoginActive] = useState(true)
   const [isAuthOpen, setIsAuthOpen] = useState(false)

@@ -1,0 +1,52 @@
+.followers{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #f2f5fa;
+    min-height: 100dvh;
+    height: 100%;
+}
+.follow-header{
+    width: 100%;
+    padding: 20px;
+    margin: 25px auto;
+}
+.follow-header>span{
+    height: fit-content;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2c3d4f;
+}
+.card-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    padding-left: 20px;
+    gap: 20px;
+}
+.card{
+    width: 300px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+}
+.card-img{
+    height: 60%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card-img>img{
+    width: 60%;
+    object-fit: contain;
+}
+.card-desc{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: start;
+    gap: 10px;
+}

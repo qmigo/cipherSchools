@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import '@/components/Register/register.css'
 import axios from 'axios'
+import {toast} from 'react-toastify'
+
 
 const Register = (props) => {
    
@@ -21,7 +23,7 @@ const Register = (props) => {
                 
             }            
         } catch (error) {
-            console.log(error)
+            toast(error)
         }
         setIsLoading(false)
     }

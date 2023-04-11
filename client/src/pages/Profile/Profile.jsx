@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import '@/pages/Profile/profile.css'
-
 import { useSelector } from 'react-redux';
 import About from '../../components/About/About';
 import HeatMap from '../../components/HeatMap/HeatMap';
@@ -8,11 +7,35 @@ import OnTheWeb from '../../components/OnTheWeb/OnTheWeb';
 import PersonalInfo from '../../components/PersonalInfo/PersonalInfo';
 import Security from '../../components/Security/Security';
 import Interest from '../../components/Interest/Interest';
+import axios from 'axios';
+import {toast} from 'react-toastify'
+import {useNavigate} from 'react-router-dom'
 
 const Profile = () => {
 
-    const {name, email} = useSelector(state => state.user)     
+    const {userId, name, email} = useSelector(state => state.user)  
+    const token = localStorage.getItem('token')
+    
+    const [isLoading, setIsLoading] = useState(false)
+    const [followers, setFollowers] = useState(null)
 
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+      async function fetchData(){
+        setIsLoading(true)
+        try {
+            const {data} = await axios.get(`${process.env.URL}/getFollowerDetails?userId=${userId}`,{
+                headers: { Authorization: `Bearer ${token}` }
+            })
+            
+        } catch (error) {
+            toast(error)
+        }
+        setIsLoading(false)
+    }
+    fetchData()
+    },[])
   return (
     <>
     {
@@ -30,7 +53,7 @@ const Profile = () => {
             <span>{name}</span>
             <span>{email}</span>
             </div>
-            <span className='header-followers'>0 Followers</span>
+            <span className='header-followers' onClick={()=>{navigate('/followers')}}>{followers===null?0:"-"} Followers</span>
         </div>
       </div>
     </div>

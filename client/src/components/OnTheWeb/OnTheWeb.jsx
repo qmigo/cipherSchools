@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import {toast} from 'react-toastify'
+
 
 const OnTheWeb = () => {
 
@@ -37,7 +39,7 @@ const OnTheWeb = () => {
             setGithub(data.user.github)
             setWebsite(data.user.website)
         } catch (error) {
-            console.log(error)
+            toast(error)
         }
         setIsLoading(false)
     }
@@ -45,7 +47,7 @@ const OnTheWeb = () => {
     async function postData(){
         if(!userId)
         {
-            console.log('userId not exist')
+            toast('userId not exist')
             return
         }
         setIsLoading(true)
@@ -61,7 +63,7 @@ const OnTheWeb = () => {
                 headers: { Authorization: `Bearer ${token}` }
             })
         } catch (error) {
-            console.log(error)
+            toast(error)
         }
         setIsLoading(false)
     }

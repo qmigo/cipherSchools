@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios'
 import { useSelector } from 'react-redux'
+import {toast} from 'react-toastify'
+
 
 const PersonalInfo = () => {
 
@@ -30,7 +32,7 @@ const PersonalInfo = () => {
             setHighestEd(data.user.education)
             setJob(data.user.occupation)
         } catch (error) {
-            console.log(error)
+            toast(error)
         }
         setIsLoading(false)
     }
@@ -38,7 +40,7 @@ const PersonalInfo = () => {
     async function postData(){
         if(!userId)
         {
-            console.log('userId not exist')
+            toast('userId not exist')
             return
         }
         setIsLoading(true)
@@ -50,7 +52,7 @@ const PersonalInfo = () => {
                 headers: { Authorization: `Bearer ${token}` }
             })
         } catch (error) {
-            console.log(error)
+            toast(error)
         }
         setIsLoading(false)
     }

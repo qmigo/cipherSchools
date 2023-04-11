@@ -3,6 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios'
 import { useSelector } from 'react-redux'
+import {toast} from 'react-toastify'
+
 
 const Security = () => {
 
@@ -25,13 +27,13 @@ const Security = () => {
     const savePassword = async()=>{
         if(!oldPassword || !newPassword || !confirmPassword)
         {
-            alert('All fields are mandatory')
+            toast('All fields are mandatory')
             return
         }
 
         if(newPassword !== confirmPassword)
         {
-            alert("Password and Confirm Password not match")
+            toast("Password and Confirm Password not match")
             return
         }
 
@@ -47,10 +49,10 @@ const Security = () => {
             }
             )
            
-            alert("Password Changed Successfully")
+            toast("Password Changed Successfully")
             
         } catch (error) {
-            alert(error.response.data.msg)
+            toast(error.response.data.msg)
         }
         isLoading(false)
         setIsSecurityActive(false)

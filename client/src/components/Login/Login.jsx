@@ -5,6 +5,8 @@ import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUser } from '@/slice/userSlice'
 import { useNavigate } from 'react-router-dom'
+import {toast} from 'react-toastify'
+
 const Login = (props) => {
   const navigate = useNavigate()
   const user = useSelector(state => state.user)
@@ -32,7 +34,7 @@ const Login = (props) => {
           }
 
       } catch (error) {
-          console.log(error)
+          toast(error)
       }
       setIsLoading(false)
   }

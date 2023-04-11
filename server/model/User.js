@@ -33,7 +33,17 @@ const userSchema = new mongoose.Schema({
     followers:{
         type: [ mongoose.Types.ObjectId ],
         ref: 'user'
-    }
+    },
+    about: String,
+    linkedin: String,
+    github: String,
+    facebook: String,
+    twitter: String,
+    instagram: String,
+    website: String,
+    education: String,
+    occupation: String,
+    interest: [String]
 },{timestamps: true})
 
 userSchema.pre('save', async function(){
@@ -42,7 +52,6 @@ userSchema.pre('save', async function(){
 })
 
 userSchema.methods.validatePassword = async function(password){
-    console.log(password, this.password)
     const result = await bcryptjs.compare(password, this.password)
     return result
 }
@@ -50,7 +59,8 @@ userSchema.methods.validatePassword = async function(password){
 userSchema.methods.createJWT = async function(){
     return jwt.sign({
         userId: this._id,
-        firstName: this.firstName
+        name: this.firstName,
+        email: this.email
     },process.env.JWT_SECRET,{expiresIn:process.env.JWT_LIFETIME})
 }
 

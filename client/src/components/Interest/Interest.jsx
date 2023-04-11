@@ -3,6 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios'
 import { useSelector } from 'react-redux'
+import {toast} from 'react-toastify'
+
 
 const codeMap = {
   'appDev':'App Development',
@@ -50,7 +52,7 @@ const Interest = () => {
               if(item==='others') setOthers(true)
             })
       } catch (error) {
-          console.log(error)
+          toast(error)
       }
       setIsLoading(false)
 
@@ -60,7 +62,7 @@ const Interest = () => {
     async function postData(){
         if(!userId)
         {
-            console.log('userId not exist')
+            toast('userId not exist')
             return
         }
         setIsLoading(true)
@@ -81,7 +83,7 @@ const Interest = () => {
             })
             setIsInterestActive(false)
         } catch (error) {
-            console.log(error)
+            toast(error)
         }
         fetchData()
         setIsLoading(false)
@@ -90,7 +92,6 @@ const Interest = () => {
     useEffect(()=>{
       fetchData()
     },[])
-    console.log(interests)
     
   return (
     <div className="profile-box profile-interests">

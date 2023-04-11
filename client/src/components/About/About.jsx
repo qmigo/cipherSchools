@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
-
+import {toast} from 'react-toastify'
 
 const About = () => {
     
@@ -27,7 +27,7 @@ const About = () => {
             })
             setAboutMe(data.user.about)
         } catch (error) {
-            console.log(error)
+            toast(error)
         }
         setIsLoading(false)
     }
@@ -35,7 +35,7 @@ const About = () => {
     async function postData(){
         if(!userId)
         {
-            console.log('userId not exist')
+            toast('userId not exist')
             return
         }
         setIsLoading(true)
@@ -46,7 +46,7 @@ const About = () => {
                 headers: { Authorization: `Bearer ${token}` }
             })
         } catch (error) {
-            console.log(error)
+            toast(error)
         }
         setIsLoading(false)
     }
